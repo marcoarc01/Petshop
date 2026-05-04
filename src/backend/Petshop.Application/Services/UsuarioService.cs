@@ -16,7 +16,11 @@ namespace Petshop.Application.Services
         }
         public async Task<Result<UsuarioDto>> CriarUsuarioAsync(CriarUsuarioDto criarUsuarioDto)
         {
-            var usuario = _mapper.Map<Domain.Entities.Usuario>(criarUsuarioDto);
+            var usuario = new Domain.Entities.Usuario(
+                criarUsuarioDto.Nome,
+                criarUsuarioDto.Email,
+                criarUsuarioDto.Senha
+            );
             await _uow.Usuarios.AdicionarAsync(usuario);
             await _uow.CommitAsync();
             return Result<UsuarioDto>.Ok(_mapper.Map<UsuarioDto>(usuario));
@@ -39,7 +43,7 @@ namespace Petshop.Application.Services
 
             return Result<UsuarioDto>.Ok(_mapper.Map<UsuarioDto>(usuario));
         }
-        
+
         public async Task<Result<bool>> DeletarUsuarioAsync(Guid id)
         {
             var usuario = await _uow.Usuarios.ObterPorIdAsync(id);

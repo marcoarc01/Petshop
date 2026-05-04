@@ -16,7 +16,11 @@ namespace Petshop.Application.Services
         }
         public async Task<Result<ConsultaDto>> CriarConsultaAsync(CriarConsultaDto criarConsultaDto)
         {
-            var consulta = _mapper.Map<Domain.Entities.Consulta>(criarConsultaDto);
+            var consulta = new Domain.Entities.Consulta(
+                criarConsultaDto.PetId,
+                criarConsultaDto.Data,
+                criarConsultaDto.Descricao
+            );
             await _uow.Consultas.AdicionarAsync(consulta);
             await _uow.CommitAsync();
             return Result<ConsultaDto>.Ok(_mapper.Map<ConsultaDto>(consulta));

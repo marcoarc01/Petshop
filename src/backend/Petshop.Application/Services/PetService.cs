@@ -14,9 +14,17 @@ namespace Petshop.Application.Services
             _uow = uow;
             _mapper = mapper;
         }
+
         public async Task<Result<PetDto>> CriarPetAsync(CriarPetDto criarPetDto)
         {
-            var pet = _mapper.Map<Domain.Entities.Pet>(criarPetDto);
+            var pet = new Petshop.Domain.Entities.Pet(
+                criarPetDto.Nome,
+                criarPetDto.Raca,
+                criarPetDto.Tipo,
+                criarPetDto.Peso,
+                criarPetDto.DataNascimento,
+                criarPetDto.DonoId
+            );
             await _uow.Pets.AdicionarAsync(pet);
             await _uow.CommitAsync();
             return Result<PetDto>.Ok(_mapper.Map<PetDto>(pet));

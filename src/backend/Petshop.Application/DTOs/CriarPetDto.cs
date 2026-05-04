@@ -3,7 +3,7 @@ namespace Petshop.Application.DTOs
 {
     public class CriarPetDto
     {
-        public Guid ClienteId { get; set; }
+        public Guid DonoId { get; set; }
         public string Nome { get; set; } = null!;
         public DateTime DataNascimento { get; set; }
         public string Raca { get; set; } = null!;
