@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Petshop.API/Petshop.API.csproj" />
+  <Project Path="Petshop.Application/Petshop.Application.csproj" />
+  <Project Path="Petshop.Domain/Petshop.Domain.csproj" />
+  <Project Path="Petshop.Infrastructure/Petshop.Infrastructure.csproj" />
+</Solution>
