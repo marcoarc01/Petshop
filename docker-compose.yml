@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:16
+    container_name: petshop_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - petshop_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./src/backend
+      dockerfile: Petshop.API/Dockerfile
+    container_name: petshop_api
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ConnectionStrings__Default: Host=db;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+    ports:
+      - "${API_PORT}:8080"
+    depends_on:
+      - db
+
+volumes:
+  petshop_data:

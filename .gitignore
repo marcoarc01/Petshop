@@ -82,3 +82,5 @@ TestResults/
 # Publicação
 publish/
 **/publish/
+
+.store/
