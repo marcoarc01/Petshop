@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /app
 
-COPY Petshop.sln .
+COPY Petshop.slnx .
 COPY Petshop.Domain/Petshop.Domain.csproj Petshop.Domain/
 COPY Petshop.Application/Petshop.Application.csproj Petshop.Application/
 COPY Petshop.Infrastructure/Petshop.Infrastructure.csproj Petshop.Infrastructure/

@@ -14,7 +14,7 @@ services:
   api:
     build:
       context: ./src/backend
-      dockerfile: Petshop.API/Dockerfile
+      dockerfile: Dockerfile
     container_name: petshop_api
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
