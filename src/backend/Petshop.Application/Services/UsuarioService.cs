@@ -16,10 +16,11 @@ namespace Petshop.Application.Services
         }
         public async Task<Result<UsuarioDto>> CriarUsuarioAsync(CriarUsuarioDto criarUsuarioDto)
         {
+            var senhaHash = BCrypt.Net.BCrypt.HashPassword(criarUsuarioDto.Senha);
             var usuario = new Domain.Entities.Usuario(
                 criarUsuarioDto.Nome,
                 criarUsuarioDto.Email,
-                criarUsuarioDto.Senha
+                senhaHash
             );
             await _uow.Usuarios.AdicionarAsync(usuario);
             await _uow.CommitAsync();
